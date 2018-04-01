@@ -33,5 +33,5 @@ window.onload = function() {
 		}
 	}
 
-	// run();
+	run();
 }
