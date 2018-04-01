@@ -8,30 +8,30 @@ window.onload = function() {
 	 		w = canvas.width;
 
 
-	var		x = 20,
-	 		color = 0;
-	var i = 0, j, times = 2000;
+	var		x = 10,
+	 			color = 0,
+	 			times = 1000;
 
-	i = 0;
-	for (var k = 0; k < times; k++) {
-		i = 0; j = 0;
-		setTimeout(function run() {
-			times--;
-			if (i >= h) {
-				i = 0;
+	function run() {
+		times--;
+		var i = 0;
+		var j = 0;
+
+		while (x * i < h) {
+			j = 0;
+			while (x * j < w) {
+				color = Math.floor(Math.random() * 255)
+				ctx.fillStyle = 'rgb(' + color + ', ' + color + ', ' + color + ')';
+				ctx.fillRect(j * x, i * x, x, x);
+				j++;
 			}
-			if (j >= w) {
-				j = 0;
-				i += x;
-			}
-			color = Math.floor(Math.random() * 255)
-			ctx.fillStyle = 'rgb(' + color + ', ' + color + ', ' + color + ')';
-			ctx.fillRect(j, i, x, x);
-			j += x;
-			if (times > 0) {
-				setTimeout(run, 100);
-			}
-		}, 100);
+			i++;
+		}
+
+		if (times > 0) {
+			setTimeout(run, 10);
+		}
 	}
 
+	// run();
 }
