@@ -13,7 +13,7 @@ window.onload = function() {
 		this.size = Math.floor(Math.random() * 5 + 2);
 		this.dx = Math.random() * 100 - 50;
 		this.dy = Math.random() * 100 - 50;
-		this.color = 'rgb(' + Math.floor(Math.random() * 100 + 150) + ', ' + Math.floor(Math.random() * 100) + ', ' + Math.floor(Math.random() * 100 + 150) + ')';
+		this.color = 'rgba(0, 0, 0, ' + (Math.random() / 2 + 0.3) + ')';
 		this.dists = [];
 	}
 
@@ -44,23 +44,24 @@ window.onload = function() {
 		particles[n + 1].y = e.clientY;
 	});
 
-	ctx.strokeStyle = '#d3cece';
-
 	function go() {
-		ctx.fillStyle = 'black'
+		ctx.fillStyle = 'white'
 		ctx.fillRect(0, 0, w, h);
 		for (var i = 0; i < particles.length; i++) {
 			particles[i].run();
 			ctx.fillStyle = particles[i].color;
+
 			for (var j = 0; j < particles.length; j++) {
 				if ((j != i) && (particles[i].dists[j] < 100)) {
 					ctx.lineWidth = Math.floor((100 - particles[i].dists[j]) / 20);
+					ctx.strokeStyle = 'rgba(0, 0, 0, ' + (100 - particles[i].dists[j]) / 100 + ')';
 					ctx.beginPath();
 					ctx.moveTo(particles[i].x, particles[i].y);
 					ctx.lineTo(particles[j].x, particles[j].y);
 					ctx.stroke();
 				}
 			}
+
 			ctx.beginPath();
 			ctx.arc(particles[i].x, particles[i].y, particles[i].size, 0, 2 * Math.PI);
 			ctx.fill();
