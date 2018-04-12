@@ -1,0 +1,20 @@
+<svg width="580" height="400" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <defs>
+  <filter height="200%" width="200%" y="-50%" x="-50%" id="svg_2_blur">
+   <feGaussianBlur stdDeviation="4.3" in="SourceGraphic"/>
+  </filter>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="#fff" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" d="m92.5,116.4c100,-37 121,-8 111,27c-10,35 47,98 99,35c52,-63 15,-110 -15,-117c-30,-7 -194,-23 -199,-2c-5,21 -96,94 4,57z" stroke-width="21" stroke="#000" fill="#fff"/>
+  <path opacity="0.6" filter="url(#svg_2_blur)" transform="rotate(-43 419.177734375,199.99998474121094) " id="svg_2" d="m419.17774,166.01759c22.47008,-77.3752 110.5086,0 0,99.48239c-110.5086,-99.48239 -22.47008,-176.85759 0,-99.48239z" fill-opacity="null" stroke-opacity="null" stroke-width="6" stroke="#000" fill="#fff"/>
+ </g>
+</svg>
