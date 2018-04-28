@@ -21,7 +21,7 @@ class Triangle {
 		ctx.moveTo(this.start.x + this.a.x, this.start.y + this.a.y);
 		ctx.lineTo(this.start.x + this.b.x, this.start.y + this.b.y);
 		ctx.lineTo(this.start.x + this.c.x, this.start.y + this.c.y);
-
+		ctx.closePath();
 		ctx.stroke();
 	}
 	rotateX(t) {
