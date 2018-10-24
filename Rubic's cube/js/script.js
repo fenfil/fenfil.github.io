@@ -21,7 +21,7 @@ function createScene() {
 
 	renderer = new THREE.WebGLRenderer({antialias: true});
 	renderer.setSize(w, h);
-	renderer.setClearColor(0x000000);
+	renderer.setClearColor(new THREE.Color('#F2ED99'));
 
 	container = document.getElementById('world');
 	container.appendChild(renderer.domElement);
@@ -34,18 +34,18 @@ function createScene() {
 	stats = new Stats;
 	stats.setMode(0);
 
-	scene.add(new THREE.AxesHelper(5));
+	// scene.add(new THREE.AxesHelper(5));
 
 	document.getElementById('stats').appendChild(stats.domElement);
 }
 
 function createLights() {
 
-	let point = new THREE.PointLight(0xffffff, 5);
+	let point = new THREE.PointLight(0xffffff, 1);
 	point.position.set(-150, 150, 150);
 	scene.add(point);
 
-	let amb = new THREE.AmbientLight(0xffffff, .7);
+	let amb = new THREE.AmbientLight(0xffffff, .9);
 	scene.add(amb);
 }
 

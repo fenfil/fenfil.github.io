@@ -1,6 +1,7 @@
 class Rubic {
 	constructor() {
 		let size = 30;
+		let offset = 5;
 
 		this.isExecuting = false;
 		this.step = 0;
@@ -17,7 +18,7 @@ class Rubic {
 				this.cubes[i][j] = [];
 				for (let k = -1; k < 2; k++) {
 					let colors = [new THREE.Color('blue'), new THREE.Color('green'), new THREE.Color('white'),
-									new THREE.Color('yellow'), new THREE.Color('red'), new THREE.Color('orange'), new THREE.Color(0x404040)];
+									new THREE.Color('yellow'), new THREE.Color('red'), new THREE.Color('orange'), new THREE.Color(0x000000)];
 					let materials = [];
 					colors.forEach(e => materials.push(new THREE.MeshPhongMaterial({color: e})));
 					if (i == 0 && j == 0 && k == 0) continue;
@@ -33,7 +34,7 @@ class Rubic {
 					if (k != 1) {a.geometry.faces[8].materialIndex = a.geometry.faces[9].materialIndex = 6}
 					if (k != -1) {a.geometry.faces[10].materialIndex = a.geometry.faces[11].materialIndex = 6}
 
-					a.position.set(i * size + i * 5, j * size + j * 5, k * size + k * 5);
+					a.position.set(i * size + i * offset, j * size + j * offset, k * size + k * offset);
 					this.mesh.add(a);
 					this.cubes[i][j][k] = a;
 				}
