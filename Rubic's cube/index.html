@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		#stats {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		#world {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		#world canvas {
+			display: block;
+		}
+		.config {
+			position: absolute;
+			top: 0;
+			right: 0;
+			display: inline-block;
+			padding: 10px;
+			margin: 5px;
+			background-color: rgba(200, 20, 150, .2);
+			border: 1px solid red;
+		}
+		.config span {
+			display: block;
+			margin-bottom: 10px;
+			background-color: #fff;
+			cursor: pointer;
+			padding: 5px 4px;
+			border-radius: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div id="stats"></div>
+	<div id="world"></div>
+	<div class="config">
+		<span onclick="cube.setOperationString('urrfbrbbruulbbruuudddrrfrrrlbbuuff')">superflip</span>
+		<span onclick="cube.setOperationString('ffbbllrruudd')">doubleflip</span>
+	</div>
+	<script src="js/lib/three.min.js"></script>
+  <script src="js/lib/stats.js"></script>
+  <script src="js/lib/orbitControls.js"></script>
+	<script src="js/rubic's_cube.js"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>
