@@ -68,7 +68,7 @@ function createCube() {
 
 }
 
-function desolveCube() {
+function unsolveCube() {
 
 	let min = 10, max = 20;
 
