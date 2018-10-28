@@ -15,7 +15,7 @@ function createScene() {
 	h = window.innerHeight;
 
 	scene = new THREE.Scene();
-	scene.fog = new THREE.Fog(0x000000, 100, 350);
+	scene.fog = new THREE.Fog(new THREE.Color('rgb(255, 255, 255)'), 200, 350);
 	
 	camera = new THREE.PerspectiveCamera(50, w/h, 1, 10000);
 	camera.position.z = 250;
@@ -23,7 +23,7 @@ function createScene() {
 
 	renderer = new THREE.WebGLRenderer({antialias: true});
 	renderer.setSize(w, h);
-	renderer.setClearColor(new THREE.Color('#F2ED99'));
+	renderer.setClearColor(new THREE.Color('#B3F2F8'));
 
 	container = document.getElementById('world');
 	container.appendChild(renderer.domElement);
@@ -43,9 +43,18 @@ function createScene() {
 
 function createLights() {
 
-	let point = new THREE.PointLight(0xffffff, 1);
-	point.position.set(-150, 150, 150);
-	scene.add(point);
+	// let point1 = new THREE.PointLight(new THREE.Color('rgb(90, 10, 10)'), 14);
+	// point1.position.set(0, 0, 30);
+	// scene.add(point1);
+	// let point2 = new THREE.PointLight(new THREE.Color('rgb(10, 10, 90)'), 14);
+	// point2.position.set(30, 0, 0);
+	// scene.add(point2);
+	// let point3 = new THREE.PointLight(new THREE.Color('rgb(50, 50, 10)'), 14);
+	// point3.position.set(0, 0, -30);
+	// scene.add(point3);
+	// let point4 = new THREE.PointLight(new THREE.Color('rgb(10, 90, 10)'), 14);
+	// point4.position.set(-30, 0, 0);
+	// scene.add(point4);
 
 	let amb = new THREE.AmbientLight(0xffffff, .9);
 	scene.add(amb);
