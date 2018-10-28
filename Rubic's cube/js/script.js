@@ -29,7 +29,7 @@ function createScene() {
 	container.appendChild(renderer.domElement);
 
 	orbitControls = new THREE.OrbitControls(camera);
-  // orbitControls.autoRotate = true;
+  orbitControls.autoRotate = true;
   
   clock = new THREE.Clock();
 
