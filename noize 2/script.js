@@ -25,8 +25,21 @@ window.onload = function() {
 
 	ctx.putImageData(img, 0, 0);	
 
+	let span = document.getElementsByTagName('span')[0];
+	let time = performance.now();
+	let count = 0;
+
+	function updateStats() {
+		let newt = performance.now();
+		span.innerHTML = count / (newt - time) * 1000;
+		time = newt;
+		count = 0;
+	}
+
 	let animate = () => {
 		requestAnimationFrame(animate);
+		count++;
+		if (count === 10) updateStats();
 		for (let i = 0; i < img.data.length; i+=4) {
 			let r = Math.random()*255;
 			img.data[i] = r;
