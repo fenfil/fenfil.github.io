@@ -12,3 +12,5 @@ if ('ondevicelight' in window) {
 } else {
   document.querySelector('span').innerHTML = 'error';
 }
+
+navigator.vibrate(200);
