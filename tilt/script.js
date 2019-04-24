@@ -6,6 +6,8 @@ a.style.width = w;
 a.style.height = h;
 
 window.addEventListener('deviceorientation', (e) => {
-    a.height = h * Math.cos(e.gamma);
-    a.width = w * Math.cos(e.alpha);
+    // a.height = h * Math.cos(e.gamma);
+    // a.width = w * Math.cos(e.alpha);
+    aspan.innerText = h * Math.cos(e.gamma);
+    bspan.innerText = w * Math.cos(e.alpha);
 });
