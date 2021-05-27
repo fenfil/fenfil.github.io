@@ -49,15 +49,15 @@ let drawData = [];
 
 // const phi = x => x;
 // const phi = x => Math.sin((5 * Math.PI * x) / L);
-const phi = x => 1 - 4 * (x - 0.5) ** 2;
+const phi = (x) => 1 - 4 * (x - 0.5) ** 2;
 
-const rotate = vec =>
+const rotate = (vec) =>
   rotateY(rotateX(rotateZ(vec, ROTATE_Z), ROTATE_X), ROTATE_Y);
 
 const coordsToMatrixPos = ([i, j, k]) =>
   k + j * (Z_POINTS + 1) + i * (Z_POINTS + 1) * (Y_POINTS + 1);
 
-const matrixPosToCoords = pos => {
+const matrixPosToCoords = (pos) => {
   const i = (pos / ((Z_POINTS + 1) * (Y_POINTS + 1))) | 0;
   pos %= (Z_POINTS + 1) * (Y_POINTS + 1);
   const j = (pos / (Z_POINTS + 1)) | 0;
@@ -67,7 +67,8 @@ const matrixPosToCoords = pos => {
 };
 
 const a = (x, n) =>
-  (2 / L) * Integral(x => phi(x) * Math.sin((n * Math.PI * x) / L), 0, L, 100);
+  (2 / L) *
+  Integral((x) => phi(x) * Math.sin((n * Math.PI * x) / L), 0, L, 100);
 
 const analyticT = (t, x) => {
   let r = 0;
@@ -278,7 +279,7 @@ const renderDefault = () => {
         const coords = rotate([
           (X_LEN * i) / X_POINTS,
           (Y_LEN * j) / Y_POINTS,
-          (Z_LEN * k) / Z_POINTS
+          (Z_LEN * k) / Z_POINTS,
         ]);
         const pos = coordsToMatrixPos([i, j, k]);
         const dataSize = frameData[pos];
@@ -331,7 +332,7 @@ const renderNoize = () => {
             let coords = [
               (X_LEN * (i + offsetx)) / X_POINTS,
               (Y_LEN * (j + offsety)) / Y_POINTS,
-              (Z_LEN * (k + offsetz)) / Z_POINTS
+              (Z_LEN * (k + offsetz)) / Z_POINTS,
             ];
             renderedFor.push(coords);
             coords = rotate(coords);
@@ -389,13 +390,13 @@ document.addEventListener("mousedown", () => {
 document.addEventListener("mouseup", () => {
   isMouseDown = false;
 });
-document.addEventListener("mousemove", e => {
+document.addEventListener("mousemove", (e) => {
   if (!isMouseDown) return;
   ROTATE_Z -= e.movementX * 0.001;
   ROTATE_X -= e.movementY * 0.001;
   render();
 });
-document.addEventListener("scroll", e => {
+document.addEventListener("scroll", (e) => {
   SCALE += window.scrollY;
   render();
 });
