@@ -92,67 +92,8 @@ const calcAnalytic = () => {
 };
 
 const calcWeb = () => {
-  let points = [];
-  const MATRIX_LENGTH = (X_POINTS + 1) * (Y_POINTS + 1) * (Z_POINTS + 1);
-  const I_OFFSET = (Y_POINTS + 1) * (Z_POINTS + 1);
-  const J_OFFSET = Z_POINTS + 1;
-  const K_OFFSET = 1;
-
-  let lastPoints = new Array(MATRIX_LENGTH);
-  for (let i = 0; i <= X_POINTS; i++) {
-    for (let j = 0; j <= Y_POINTS; j++) {
-      for (let k = 0; k <= Z_POINTS; k++) {
-        const pos = coordsToMatrixPos([i, j, k]);
-        lastPoints[pos] = 0;
-      }
-    }
-  }
-  const srcPos = coordsToMatrixPos(SOURCE_POS);
-  const srcPos2 = coordsToMatrixPos([1, 1, 1]);
-  lastPoints[srcPos] = SOURCE_MAS;
-  // lastPoints[srcPos2] = SOURCE_MAS;
-
-  drawData = [lastPoints];
-
-  const DDI = (DT * D) / DX / DX;
-  const DDJ = (DT * D) / DY / DY;
-  const DDK = (DT * D) / DZ / DZ;
-
-  for (let j = 1; j <= T_POINTS; j++) {
-    const m = new Matrix(MATRIX_LENGTH + 1, MATRIX_LENGTH);
-
-    for (let i = 0; i <= X_POINTS; i++) {
-      for (let j = 0; j <= Y_POINTS; j++) {
-        for (let k = 0; k <= Z_POINTS; k++) {
-          const pos = coordsToMatrixPos([i, j, k]);
-          if (
-            i == 0 ||
-            j == 0 ||
-            k == 0 ||
-            i == X_POINTS ||
-            j == Y_POINTS ||
-            k == Z_POINTS
-          ) {
-            m.arr[pos][pos] = 1;
-          } else {
-            m.arr[pos][pos] = -2 * (DDI + DDJ + DDK) - 1;
-            m.arr[pos][pos - I_OFFSET] = DDI;
-            m.arr[pos][pos + I_OFFSET] = DDI;
-            m.arr[pos][pos - J_OFFSET] = DDJ;
-            m.arr[pos][pos + J_OFFSET] = DDJ;
-            m.arr[pos][pos - K_OFFSET] = DDK;
-            m.arr[pos][pos + K_OFFSET] = DDK;
-
-            m.arr[pos][MATRIX_LENGTH] = -lastPoints[pos];
-          }
-        }
-      }
-    }
-
-    points = m.gauss();
-    drawData.push(points);
-    lastPoints = points;
-  }
+  calcInitialFrame();
+  calcNonInitialFrame();
 };
 
 const calcInitialFrame = () => {
@@ -168,14 +109,58 @@ const calcInitialFrame = () => {
     }
   }
   const srcPos = coordsToMatrixPos(SOURCE_POS);
-  const srcPos2 = coordsToMatrixPos([1, 1, 1]);
   lastPoints[srcPos] = SOURCE_MAS;
-  // lastPoints[srcPos2] = SOURCE_MAS;
 
   drawData = [lastPoints];
 };
 
 const calcNonInitialFrame = () => {
+  let points = [];
+  const lastPoints = drawData[drawData.length - 1];
+
+  const MATRIX_LENGTH = (X_POINTS + 1) * (Y_POINTS + 1) * (Z_POINTS + 1);
+  const I_OFFSET = (Y_POINTS + 1) * (Z_POINTS + 1);
+  const J_OFFSET = Z_POINTS + 1;
+  const K_OFFSET = 1;
+  const DDI = (DT * D) / DX / DX;
+  const DDJ = (DT * D) / DY / DY;
+  const DDK = (DT * D) / DZ / DZ;
+
+  const m = new Matrix(MATRIX_LENGTH + 1, MATRIX_LENGTH);
+
+  for (let i = 0; i <= X_POINTS; i++) {
+    for (let j = 0; j <= Y_POINTS; j++) {
+      for (let k = 0; k <= Z_POINTS; k++) {
+        const pos = coordsToMatrixPos([i, j, k]);
+        if (
+          i == 0 ||
+          j == 0 ||
+          k == 0 ||
+          i == X_POINTS ||
+          j == Y_POINTS ||
+          k == Z_POINTS
+        ) {
+          m.arr[pos][pos] = 1;
+        } else {
+          m.arr[pos][pos] = -2 * (DDI + DDJ + DDK) - 1;
+          m.arr[pos][pos - I_OFFSET] = DDI;
+          m.arr[pos][pos + I_OFFSET] = DDI;
+          m.arr[pos][pos - J_OFFSET] = DDJ;
+          m.arr[pos][pos + J_OFFSET] = DDJ;
+          m.arr[pos][pos - K_OFFSET] = DDK;
+          m.arr[pos][pos + K_OFFSET] = DDK;
+
+          m.arr[pos][MATRIX_LENGTH] = -lastPoints[pos];
+        }
+      }
+    }
+  }
+
+  points = m.gauss();
+  drawData.push(points);
+};
+
+const calcNonInitialFrameOld = () => {
   let points = [];
   const lastPoints = drawData[drawData.length - 1];
 
