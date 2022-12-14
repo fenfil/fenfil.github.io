@@ -34,20 +34,6 @@ class Particle {
     ctx.arc(this.x, this.y, this.d > 50 ? this.r : this.r * 5, 0, Math.PI * 2);
     ctx.fill();
   }
-
-  lineTo(otherParticle) {
-    ctx.strokeStyle = "#cccccc";
-
-    const d = Math.sqrt((this.x - otherParticle.x) ** 2 + (this.y - otherParticle.y) ** 2);
-    if (d > 50) {
-      return;
-    }
-
-    ctx.beginPath();
-    ctx.moveTo(this.x, this.y);
-    ctx.lineTo(otherParticle.x, otherParticle.y);
-    ctx.stroke();
-  }
 }
 
 let particles = new Array(200).fill(0).map(() => new Particle());
@@ -70,12 +56,6 @@ function animate() {
     particle.run();
     particle.draw();
   });
-
-  for (let i = 0; i < particles.length - 1; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      particles[i].lineTo(particles[j]);
-    }
-  }
 }
 
 animate();
