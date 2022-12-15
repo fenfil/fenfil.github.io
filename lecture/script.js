@@ -65,7 +65,7 @@ class Particle {
       x: (otherParticle.x - this.x) * multiplier,
       y: (otherParticle.y - this.y) * multiplier,
     };
-    let n = Math.sqrt(vector.x ** 2 + vector.y ** 2) * 20;
+    let n = Math.sqrt(vector.x ** 2 + vector.y ** 2) * 70;
     vector.x /= n;
     vector.y /= n;
     this.vx += vector.x;
@@ -96,8 +96,8 @@ document.addEventListener("click", (e) => {
     };
     vector.x /= p.d;
     vector.y /= p.d;
-    p.vx = vector.x * 10;
-    p.vy = vector.y * 10;
+    p.vx = vector.x * 7;
+    p.vy = vector.y * 7;
   });
 });
 
